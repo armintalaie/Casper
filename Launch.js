@@ -1,16 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import Launch from "./Launch";
-import Status from "./Status";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  SafeAreaView,
+  TouchableOpacity,
+  GlobalFont,
+} from "react-native";
 
-export default function App() {
+export default function launch() {
   return (
     <SafeAreaView style={styles.container}>
-      <Status />
+      <Text style={styles.heading}>
+        Get your headspace back one email at a time
+      </Text>
     </SafeAreaView>
   );
+
+  function onPress() {
+    alert("You tapped the button!");
+  }
 }
 
 const styles = StyleSheet.create({
