@@ -7,44 +7,36 @@ import {
   Button,
   SafeAreaView,
   TouchableOpacity,
-  GlobalFont,
+  ScrollView,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-const Stack = createStackNavigator();
-import AllTemplates from "./allTemplates";
-import NewTemplate from "./newTemplate";
+import TemplateCard from "./templateCard";
 
-export default function Templates({ navigation, templates, updateTemplates }) {
-  console.log(typeof navigation + " ksnlkemlgmrenlkmgelkmrelkemelkrm");
+export default function AllTemplates({
+  navigation,
+  templates,
+  updateTemplates,
+}) {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#ffac1c",
-        },
-        headerTintColor: "white",
-        headerBackTitle: "Back",
-      }}
-    >
-      <Stack.Screen
-        name="All"
-        children={() => (
-          <AllTemplates
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {templates.map((e) => (
+          <TemplateCard
+            temp={e}
+            title={e.title}
+            text={e.body}
             templates={templates}
-            navigation={navigation}
             updateTemplates={updateTemplates}
           />
-        )}
-        options={{ title: "Your Templates" }}
-      />
-      <Stack.Screen
-        name="New"
-        component={NewTemplate}
-        options={{ title: "New" }}
-      />
-    </Stack.Navigator>
+        ))}
+      </ScrollView>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => console.log(typeof navigation)}
+      >
+        <Text style={styles.point}>New Template </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 
   function onPress() {

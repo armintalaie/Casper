@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import HomeScreen from "./HomeScreen";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,62 +13,47 @@ const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 export default function App() {
-  return (
-    /*
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "Welcome" }}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="Profile"
-          component={HomeScreen}
-          options={{ title: "sdss" }}
-        ></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>*/
-    <Tabl />
-  );
+    return <Tabl / > ;
 }
 
 const styles = StyleSheet.create({
-  title: {
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    fontSize: 40,
-    width: "100%",
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-  },
-  container: {
-    padding: "5%",
-    width: "100%",
-    height: "100%",
-  },
-  heading: {
-    fontFamily: "Noteworthy",
-    padding: 50,
-    paddingTop: "50%",
-    fontSize: 25,
-  },
+    title: {
+        paddingHorizontal: 20,
+        paddingTop: 40,
+        fontSize: 40,
+        width: "100%",
+        fontFamily: "Noteworthy",
+        fontWeight: "bold",
+    },
+    container: {
 
-  button: {
-    backgroundColor: "#ffac1c",
-    padding: 10,
-    position: "relative",
-    bottom: 0,
-    margin: 40,
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  btnText: {
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-    fontSize: 18,
+        padding: "5%",
+        width: "100%",
+        height: "100%",
+    },
+    heading: {
+        fontFamily: "Noteworthy",
+        padding: 50,
+        paddingTop: "50%",
+        fontSize: 25,
+    },
 
-    color: "#ffffff",
-  },
+    button: {
+
+        backgroundColor: "#ffac1c",
+        padding: 10,
+        position: "relative",
+        bottom: 0,
+        margin: 40,
+        left: 0,
+        borderRadius: 10,
+        alignItems: "center",
+    },
+    btnText: {
+        fontFamily: "Noteworthy",
+        fontWeight: "bold",
+        fontSize: 18,
+
+        color: "#ffffff",
+    },
 });

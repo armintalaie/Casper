@@ -1,46 +1,64 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
+  TextInput,
+  Button,
+  SafeAreaView,
   TouchableOpacity,
   GlobalFont,
+  Settings,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
+export default function Login({ navigation }) {
+  const [text, setText] = useState("");
 
-export default function Status() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Not Active</Text>
-      <View style={styles.group}>
-        <Text style={styles.heading}>Quick Glance</Text>
-        <Text style={styles.point}>Unread Emails</Text>
-        <Text style={styles.point}>Emails sent today</Text>
-        <Text style={styles.point}>Emails recieved today</Text>
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.heading}>Quick Set</Text>
-        <Text style={styles.point}>Don't want to be notified?</Text>
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optiontext}>Do not Disturb for 1 hour</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optiontext}>Do not Disturb</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.point}>No Notification with an auto-reply</Text>
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optiontext}>Do not Disturb for 1 hour</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optiontext}>Do not Disturb</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#ffac1c",
+        },
+        headerTintColor: "white",
+        headerBackTitle: "Back",
+      }}
+    >
+      <Stack.Screen
+        name="Settings"
+        children={() => <Settings navigation={navigation} />}
+      />
+    </Stack.Navigator>
   );
+
+  function Settings() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            alert("aa");
+          }}
+        >
+          <Text style={styles.point}>Login With Gmail </Text>
+        </TouchableOpacity>
+
+        <TextInput
+          style={{ height: 40 }}
+          placeholder="Type here to translate!"
+          onChangeText={(text) => setText(text)}
+          defaultValue={text}
+        />
+        <Text style={{ padding: 10, fontSize: 42 }}>
+          {text
+            .split(" ")
+            .map((word) => word)
+            .join(" ")}
+        </Text>
+      </SafeAreaView>
+    );
+  }
 
   function onPress() {
     alert("You tapped the button!");
@@ -48,8 +66,15 @@ export default function Status() {
 }
 
 const styles = StyleSheet.create({
+  switch: {
+    margin: 40,
+    marginBottom: 20,
+    borderColor: "#ffac1c",
+    borderWidth: 1,
+    borderRadius: 15,
+  },
+
   group: {
-    flex: 1,
     backgroundColor: "yellow",
     flexDirection: "column",
     justifyContent: "flex-start",

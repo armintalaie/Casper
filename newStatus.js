@@ -2,17 +2,18 @@ import React, { Component, useState } from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  TextInput,
-  Button,
+  ScrollView,
   SafeAreaView,
   TouchableOpacity,
   GlobalFont,
 } from "react-native";
 import TemplateCard from "./templateCard";
 import SwitchSelector from "react-native-switch-selector";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
 
-export default function NewStatus({ navigation }) {
+function NewStatusScreen({ templates }) {
+  const [selectedTitle, setSelect] = useState("");
   const options = [
     { label: "no notification", value: "1" },
     { label: "Recieve notification", value: "1.5" },
@@ -23,14 +24,11 @@ export default function NewStatus({ navigation }) {
     { label: "Send auto-reply", value: "1.5" },
   ];
 
+  function changeColor() {
+    this.setState({ black: !this.state.black });
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>New Status</Text>
-
-      <View style={styles.group}>
-        <Text style={styles.point}></Text>
-      </View>
-
       <SwitchSelector
         style={styles.switch}
         buttonColor="#ebe9e8"
@@ -56,16 +54,124 @@ export default function NewStatus({ navigation }) {
         onPress={(value) => console.log(`Call onPress with value: ${value}`)}
       />
 
-      <TemplateCard />
+      <ScrollView horizontal={true} style={styles.card}>
+        {templates.map((t) => (
+          <TouchableOpacity
+            onPress={() => setSelect(t.title)}
+            style={t.title === selectedTitle ? styles.select : styles.unselect}
+          >
+            <TemplateCard
+              title={t.title}
+              text={t.body}
+              onPress={() => setSelect(t.title)}
+              style={
+                t.title === selectedTitle ? styles.select : styles.unselect
+              }
+            />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("HomeScreen");
+        }}
+      >
+        <Text style={styles.point}>Set Status </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+}
+
+export default function NewStatus({ navigation, templates }) {
+  const [selectedTitle, setSelect] = useState("");
+  const options = [
+    { label: "no notification", value: "1" },
+    { label: "Recieve notification", value: "1.5" },
+  ];
+
+  const dnd = [
+    { label: "no auto-reply", value: "1" },
+    { label: "Send auto-reply", value: "1.5" },
+  ];
+
+  function changeColor() {
+    this.setState({ black: !this.state.black });
+  }
+  return (
+    <SafeAreaView style={styles.container}>
+      <SwitchSelector
+        style={styles.switch}
+        buttonColor="#ebe9e8"
+        borderRadius={15}
+        options={options}
+        initial={1}
+        bold={true}
+        selectedColor="#000000"
+        fontSize={12}
+        borderColor="#000000"
+        borderWidth={3}
+        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+      />
+
+      <SwitchSelector
+        style={styles.switch}
+        buttonColor="#ebe9e8"
+        options={dnd}
+        initial={1}
+        bold={true}
+        fontSize={12}
+        selectedColor="#000000"
+        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+      />
+
+      <ScrollView horizontal={true} style={styles.card}>
+        {templates.map((t) => (
+          <TouchableOpacity
+            onPress={() => setSelect(t.title)}
+            style={t.title === selectedTitle ? styles.select : styles.unselect}
+          >
+            <TemplateCard
+              title={t.title}
+              text={t.body}
+              onPress={() => setSelect(t.title)}
+              style={
+                t.title === selectedTitle ? styles.select : styles.unselect
+              }
+            />
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("HomeScreen");
+        }}
+      >
+        <Text style={styles.point}>Set Status </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 
   function onPress() {
-    alert("You tapped the button!");
+    navigation.navigate("HomeScreen");
   }
 }
 
 const styles = StyleSheet.create({
+  select: {
+    padding: 0,
+    width: "auto",
+    height: "auto",
+    backgroundColor: "#f7ebdc",
+  },
+  unselect: {
+    padding: 0,
+    width: "auto",
+    height: "auto",
+  },
   switch: {
     margin: 40,
     marginBottom: 20,
@@ -128,11 +234,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
+
+  btn: {
+    padding: 2,
+    position: "relative",
+    bottom: 0,
+    margin: 2,
+    left: 0,
+    borderRadius: 10,
+    alignItems: "center",
+  },
   btnText: {
     fontFamily: "Noteworthy",
     fontWeight: "bold",
-    fontSize: 18,
-
-    color: "#ffffff",
+    fontSize: 13,
+    color: "red",
   },
 });

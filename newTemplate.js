@@ -8,39 +8,31 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import Templates from "./templates";
 
-export default function TemplateCard({
-  navigation,
-  title,
-  text,
-  temp,
-  templates,
-  updateTemplate,
-}) {
-  console.log(title + "ddddd");
+export default function NewTemplate({ navigation, title, text }) {
   return (
-    <View style={styles.templateItem}>
-      <View style={styles.fl}>
-        <Text style={styles.point}>{title}</Text>
-
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            const newTemplates = [];
-            templates.forEach((element) => {
-              if (element.title != title) newTemplates.push(element);
-            });
-          }}
-        >
-          <Text style={styles.btnText}>Delete</Text>
-        </TouchableOpacity>
+    <SafeAreaView>
+      <View style={styles.templateItem}>
+        <View style={styles.fl}>
+          <Text style={styles.point}>Your Templates</Text>
+        </View>
+        <Text style={styles.text}>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non dolores
+          quos laboriosam recusandae numquam, veniam minima tenetur adipisci
+          quae impedit, quam error quidem sint consectetur ratione, nemo
+          pariatur quia voluptas.
+        </Text>
       </View>
-      <Text style={styles.text}>{text}</Text>
-    </View>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          alert("aa");
+        }}
+      >
+        <Text style={styles.point}>Create Template </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 
   function onPress() {
@@ -57,8 +49,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     margin: 20,
-    width: "90%",
-    maxWidth: 350,
     flexDirection: "column",
   },
 
@@ -95,5 +85,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 13,
     color: "red",
+  },
+  button: {
+    backgroundColor: "#ffac1c",
+    padding: 10,
+    position: "relative",
+    bottom: 0,
+    margin: 40,
+    left: 0,
+    borderRadius: 10,
+    alignItems: "center",
   },
 });
