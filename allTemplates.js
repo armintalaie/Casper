@@ -17,6 +17,8 @@ export default function AllTemplates({
   templates,
   updateTemplates,
 }) {
+/*
+  */
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -26,13 +28,14 @@ export default function AllTemplates({
             title={e.title}
             text={e.body}
             templates={templates}
-            updateTemplates={updateTemplates}
+            updateTemplate={updateTemplates}
+            navigation={navigation}
           />
         ))}
       </ScrollView>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => console.log(typeof navigation)}
+        onPress={() => navigation.navigate("Newt", {title: 'ehbhbjb',templates: templates })}
       >
         <Text style={styles.point}>New Template </Text>
       </TouchableOpacity>

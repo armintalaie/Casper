@@ -9,19 +9,28 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function NewTemplate({ navigation, title, text }) {
+export default function NewTemplate({ navigation, title, text, updateTemplates, templates }) {
+  console.log("janjfnewkjnf\t" + title)
+  const [body, updateText] = React.useState(text == undefined? "Reply body...": text);
+  const [titleL, updateTitle] = React.useState(title == undefined? "Reply title...": title);
+
+
   return (
     <SafeAreaView>
       <View style={styles.templateItem}>
+      <TextInput style={styles.point}  maxLength={50} multiline={true}
+      onChangeText={updateTitle}
+      value = {titleL}
+      ></TextInput>
         <View style={styles.fl}>
-          <Text style={styles.point}>Your Templates</Text>
+       
         </View>
-        <Text style={styles.text}>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non dolores
-          quos laboriosam recusandae numquam, veniam minima tenetur adipisci
-          quae impedit, quam error quidem sint consectetur ratione, nemo
-          pariatur quia voluptas.
-        </Text>
+        <TextInput style={styles.text}  maxLength={250} multiline={true}
+          onChangeText={updateText}
+          value = {body}>
+
+        </TextInput>
+        
       </View>
 
       <TouchableOpacity
@@ -29,14 +38,29 @@ export default function NewTemplate({ navigation, title, text }) {
         onPress={() => {
           alert("aa");
         }}
+
+        onPress={() => {
+          add();
+          navigation.navigate("All");
+        }}
       >
         <Text style={styles.point}>Create Template </Text>
+       
       </TouchableOpacity>
     </SafeAreaView>
   );
 
   function onPress() {
     alert("You tapped the button!");
+  }
+
+  function add() {
+    const newTemplates = [];
+    templates.forEach((element) => {
+      newTemplates.push(element);
+    });
+    newTemplates.push({title: titleL, body: body})
+    updateTemplates(newTemplates)
   }
 }
 

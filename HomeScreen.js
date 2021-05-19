@@ -11,7 +11,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import NewStatus from "./newStatus";
 
 const Stack = createStackNavigator();
-
 const HomePage = ({ navigation, templates }) => {
   const [unread, setUnread] = useState(20);
   const [sent, setSent] = useState(5);
@@ -29,12 +28,14 @@ const HomePage = ({ navigation, templates }) => {
     touch = (
       <TouchableOpacity
         style={styles.statusBtn}
-        onPress={() => navigation.navigate("Status", { templates: templates })}
+        onPress={() => navigation.navigate("Status", { stat: changeStatus, templates: templates })}
       >
         <Text style={styles.btnText}>New Status</Text>
       </TouchableOpacity>
     );
   }
+
+
 
   function changeStatus() {
     if (statusIsEnabled == true) {
@@ -68,10 +69,10 @@ const HomePage = ({ navigation, templates }) => {
       <View style={styles.group}>
         <Text style={styles.point}>No Notification with an auto-reply</Text>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.btnText}>Do not Disturb for 1 hour</Text>
+          <Text style={styles.btnText}>Auto reply for 1 hour</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.btnText}>Do not Disturb</Text>
+          <Text style={styles.btnText}>Auto reply</Text>
         </TouchableOpacity>
       </View>
 
@@ -98,9 +99,11 @@ export default function HomeScreen({ navigation, templates }) {
       />
       <Stack.Screen
         name="Status"
-        children={() => <NewStatus templates={templates} />}
         options={{ title: "New Status" }}
-      />
+      >
+
+      {props => <NewStatus {...props} templates={templates}  />}
+        </Stack.Screen>
     </Stack.Navigator>
   );
 

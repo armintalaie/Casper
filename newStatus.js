@@ -14,18 +14,24 @@ const Stack = createStackNavigator();
 
 function NewStatusScreen({ templates }) {
   const [selectedTitle, setSelect] = useState("");
+  let notif = 0;
+  let disturb = 0;
   const options = [
-    { label: "no notification", value: "1" },
-    { label: "Recieve notification", value: "1.5" },
+    { label: "no notification", value: "0" },
+    { label: "Recieve notification", value: "1" },
   ];
 
   const dnd = [
-    { label: "no auto-reply", value: "1" },
-    { label: "Send auto-reply", value: "1.5" },
+    { label: "no auto-reply", value: "0" },
+    { label: "Send auto-reply", value: "1" },
   ];
 
   function changeColor() {
     this.setState({ black: !this.state.black });
+  }
+
+  function setNewStatus() {
+    alert(notif + "   " + disturb + "   " + selectedTitle);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -40,7 +46,7 @@ function NewStatusScreen({ templates }) {
         fontSize={12}
         borderColor="#000000"
         borderWidth={3}
-        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+        onPress={(value) => notif = value}
       />
 
       <SwitchSelector
@@ -51,7 +57,7 @@ function NewStatusScreen({ templates }) {
         bold={true}
         fontSize={12}
         selectedColor="#000000"
-        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+        onPress={(value) => disturb = value}
       />
 
       <ScrollView horizontal={true} style={styles.card}>
@@ -75,7 +81,7 @@ function NewStatusScreen({ templates }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate("HomeScreen");
+          setNewStatus();
         }}
       >
         <Text style={styles.point}>Set Status </Text>
@@ -84,20 +90,31 @@ function NewStatusScreen({ templates }) {
   );
 }
 
-export default function NewStatus({ navigation, templates }) {
+export default function NewStatus({ navigation, templates, stat, props }) {
   const [selectedTitle, setSelect] = useState("");
+  let notif = 0;
+  let disturb = 0;
   const options = [
-    { label: "no notification", value: "1" },
-    { label: "Recieve notification", value: "1.5" },
+    { label: "no notification", value: "0" },
+    { label: "Recieve notification", value: "1" },
   ];
 
   const dnd = [
-    { label: "no auto-reply", value: "1" },
-    { label: "Send auto-reply", value: "1.5" },
+    { label: "no auto-reply", value: "0" },
+    { label: "Send auto-reply", value: "1" },
   ];
 
   function changeColor() {
     this.setState({ black: !this.state.black });
+  }
+
+  function setNewStatus() {
+    navigation.goBack()
+    changeStatus();
+    if (disturb == 1)
+    alert(notif + "   " + disturb + "   " + selectedTitle);
+    else
+    alert(notif + "   " + disturb + "   " + selectedTitle);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -112,7 +129,7 @@ export default function NewStatus({ navigation, templates }) {
         fontSize={12}
         borderColor="#000000"
         borderWidth={3}
-        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+        onPress={(value) => (notif = value)}
       />
 
       <SwitchSelector
@@ -123,7 +140,7 @@ export default function NewStatus({ navigation, templates }) {
         bold={true}
         fontSize={12}
         selectedColor="#000000"
-        onPress={(value) => console.log(`Call onPress with value: ${value}`)}
+        onPress={(value) => (disturb = value)}
       />
 
       <ScrollView horizontal={true} style={styles.card}>
@@ -147,17 +164,13 @@ export default function NewStatus({ navigation, templates }) {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate("HomeScreen");
+          setNewStatus();
         }}
       >
         <Text style={styles.point}>Set Status </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
-
-  function onPress() {
-    navigation.navigate("HomeScreen");
-  }
 }
 
 const styles = StyleSheet.create({

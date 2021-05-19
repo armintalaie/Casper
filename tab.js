@@ -6,10 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./HomeScreen";
-import NewStatus from "./newStatus";
 import Templates from "./templates";
 import Login from "./login";
-import AllTemplates from "./allTemplates";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 const Tab = createBottomTabNavigator();
@@ -29,14 +27,15 @@ export default function Tabl() {
     },
   ]);
 
-  const updateTemplates = (updated) => {
+  function updateTemplates(updated)  {
     setTemplates(updated);
   };
   console.log(templatese);
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen
+
+      <Tab.Screen
           name="Dashboard"
           options={{
             tabBarLabel: "Home",
@@ -46,8 +45,7 @@ export default function Tabl() {
           }}
           children={() => <HomeScreen templates={templatese} />}
         />
-
-        <Tab.Screen
+      <Tab.Screen
           name="Templates"
           options={{
             tabBarLabel: "Templates",
@@ -66,11 +64,14 @@ export default function Tabl() {
             />
           )}
         />
+        
+
+       
         <Tab.Screen
           name="Settings"
           component={Login}
           options={{
-            tabBarLabel: "Templates",
+            tabBarLabel: "Settings",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="cog" color={color} size={size} />
             ),

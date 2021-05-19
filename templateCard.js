@@ -17,24 +17,34 @@ export default function TemplateCard({
   temp,
   templates,
   updateTemplate,
+
 }) {
-  console.log(title + "ddddd");
+
+  function handleDel() {
+    const newTemplates = [];
+    templates.forEach((element) => {
+      if (element.title != title) newTemplates.push(element);
+    });
+    updateTemplate(newTemplates)
+  }
+
   return (
     <View style={styles.templateItem}>
       <View style={styles.fl}>
         <Text style={styles.point}>{title}</Text>
 
         <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Edit</Text>
+          <Text style={styles.btnText}
+          onPress={() => {
+            console.log("ttt\t" + title)
+            navigation.navigate("Newt", { text: "text", title: title, templates: templates })
+        }}
+          >Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.btn}
-          onPress={() => {
-            const newTemplates = [];
-            templates.forEach((element) => {
-              if (element.title != title) newTemplates.push(element);
-            });
-          }}
+          onPress={() => handleDel()}
+           
         >
           <Text style={styles.btnText}>Delete</Text>
         </TouchableOpacity>

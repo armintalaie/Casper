@@ -3,13 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   SafeAreaView,
   TouchableOpacity,
-  GlobalFont,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -17,7 +13,7 @@ import AllTemplates from "./allTemplates";
 import NewTemplate from "./newTemplate";
 
 export default function Templates({ navigation, templates, updateTemplates }) {
-  console.log(typeof navigation + " ksnlkemlgmrenlkmgelkmrelkemelkrm");
+ 
   return (
     <Stack.Navigator
       screenOptions={{
@@ -28,22 +24,24 @@ export default function Templates({ navigation, templates, updateTemplates }) {
         headerBackTitle: "Back",
       }}
     >
+
+
       <Stack.Screen
         name="All"
-        children={() => (
-          <AllTemplates
-            templates={templates}
-            navigation={navigation}
-            updateTemplates={updateTemplates}
-          />
-        )}
         options={{ title: "Your Templates" }}
-      />
+      >
+        {props => <AllTemplates {...props} templates={templates} updateTemplates={updateTemplates} />}
+
+      </Stack.Screen>
+
       <Stack.Screen
-        name="New"
-        component={NewTemplate}
+        name="Newt"
         options={{ title: "New" }}
-      />
+      >
+
+{props => <NewTemplate {...props} templates={templates} updateTemplates={updateTemplates} />}
+        </Stack.Screen>
+     
     </Stack.Navigator>
   );
 
