@@ -1,14 +1,13 @@
 import React, { Component, useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import NewStatus from "./newStatus";
+import styles from "./style";
 
 const Stack = createStackNavigator();
 const HomePage = ({ navigation, templates }) => {
@@ -16,7 +15,6 @@ const HomePage = ({ navigation, templates }) => {
   const [sent, setSent] = useState(5);
   const [recieved, setrecieved] = useState(10);
   const [statusIsEnabled, setStatusIsEnabled] = useState(false);
-  let button = "";
   let touch = "";
   if (statusIsEnabled) {
     touch = (
@@ -111,97 +109,3 @@ export default function HomeScreen({ navigation, templates }) {
     alert("You tapped the button!");
   }
 }
-
-const styles = StyleSheet.create({
-  disable: {
-    backgroundColor: "red",
-    width: "90%",
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 30,
-
-    padding: 10,
-    marginBottom: 10,
-  },
-  group: {
-    flexDirection: "column",
-    alignItems: "center",
-    paddingTop: 10,
-    paddingHorizontal: 10,
-    width: "100%",
-    textAlign: "center",
-  },
-  title: {
-    fontSize: 30,
-    textAlign: "center",
-    width: "100%",
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-  },
-  point: {
-    fontFamily: "Noteworthy",
-    fontSize: 17,
-    textAlign: "left",
-    width: "100%",
-  },
-  container: {
-    padding: "5%",
-    width: "100%",
-    height: "100%",
-    flexDirection: "column",
-    fontFamily: "Noteworthy",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  statusBtn: {
-    width: "90%",
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-    marginTop: 30,
-    backgroundColor: "#ffac1c",
-    padding: 10,
-    marginBottom: 10,
-  },
-
-  heading: {
-    fontFamily: "Noteworthy",
-    paddingBottom: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-  },
-  option: {
-    backgroundColor: "#ffac1c",
-    alignItems: "center",
-    borderRadius: 15,
-    padding: 1,
-    width: 250,
-
-    paddingHorizontal: 1,
-    margin: 5,
-  },
-  optiontext: {
-    color: "#ffffff",
-    fontFamily: "Noteworthy",
-    fontSize: 20,
-  },
-  button: {
-    backgroundColor: "#7a7672",
-    padding: 10,
-    position: "relative",
-    bottom: 0,
-    margin: 5,
-    width: 250,
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  btnText: {
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-    fontSize: 18,
-
-    color: "#ffffff",
-  },
-});

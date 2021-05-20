@@ -1,59 +1,79 @@
 import "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import HomeScreen from "./HomeScreen";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { Component } from "react";
+import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Tabl from "./tab";
+import HomeScreen from "./HomeScreen";
+import Templates from "./templates";
+import Login from "./login";
+import { MaterialCommunityIcons } from "react-native-vector-icons";
 
-const Stack = createStackNavigator();
-const Tabs = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-    return <Tabl / > ;
+  const [templatese, setTemplates] = useState([
+    {
+      title: "Vacation",
+      body:
+        "Hi\nThank you for your email. I will be out of the office from July 1, and will not have access to email If this is urgent please contact John at John@Capser.com. I will do my best to respond promptly to your email when I return on July 30.\n\nSincerely,\nKarla",
+    },
+
+    {
+      title: "Meeting",
+      body:
+        "Hi\nI'm currently in a meeting for the time being. I will get back to shortly.\n\nSincerely,\nKarla",
+    },
+  ]);
+
+  function updateTemplates(updated)  {
+    setTemplates(updated);
+  };
+  console.log(templatese);
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+
+      <Tab.Screen
+          name="Dashboard"
+          options={{
+            tabBarLabel: "Home",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+          children={() => <HomeScreen templates={templatese} />}
+        />
+      <Tab.Screen
+          name="Templates"
+          options={{
+            tabBarLabel: "Templates",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="bookmark"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+          children={() => (
+            <Templates
+              templates={templatese}
+              updateTemplates={updateTemplates}
+            />
+          )}
+        />
+       
+        <Tab.Screen
+          name="Settings"
+          component={Login}
+          options={{
+            tabBarLabel: "Settings",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cog" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({
-    title: {
-        paddingHorizontal: 20,
-        paddingTop: 40,
-        fontSize: 40,
-        width: "100%",
-        fontFamily: "Noteworthy",
-        fontWeight: "bold",
-    },
-    container: {
-
-        padding: "5%",
-        width: "100%",
-        height: "100%",
-    },
-    heading: {
-        fontFamily: "Noteworthy",
-        padding: 50,
-        paddingTop: "50%",
-        fontSize: 25,
-    },
-
-    button: {
-
-        backgroundColor: "#ffac1c",
-        padding: 10,
-        position: "relative",
-        bottom: 0,
-        margin: 40,
-        left: 0,
-        borderRadius: 10,
-        alignItems: "center",
-    },
-    btnText: {
-        fontFamily: "Noteworthy",
-        fontWeight: "bold",
-        fontSize: 18,
-
-        color: "#ffffff",
-    },
-});

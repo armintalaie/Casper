@@ -1,16 +1,13 @@
 import React, { Component, useState } from "react";
 import {
-  StyleSheet,
   Text,
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  GlobalFont,
 } from "react-native";
 import TemplateCard from "./templateCard";
 import SwitchSelector from "react-native-switch-selector";
-import { createStackNavigator } from "@react-navigation/stack";
-const Stack = createStackNavigator();
+import styles from "./style";
 
 function NewStatusScreen({ templates }) {
   const [selectedTitle, setSelect] = useState("");
@@ -162,105 +159,13 @@ export default function NewStatus({ navigation, templates, stat, props }) {
       </ScrollView>
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.statusBtn}
         onPress={() => {
           setNewStatus();
         }}
       >
-        <Text style={styles.point}>Set Status </Text>
+        <Text style={styles.btnText}>Set Status </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  select: {
-    padding: 0,
-    width: "auto",
-    height: "auto",
-    backgroundColor: "#f7ebdc",
-  },
-  unselect: {
-    padding: 0,
-    width: "auto",
-    height: "auto",
-  },
-  switch: {
-    margin: 40,
-    marginBottom: 20,
-    borderColor: "#ffac1c",
-    borderWidth: 1,
-    borderRadius: 15,
-  },
-
-  group: {
-    backgroundColor: "yellow",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    width: "100%",
-  },
-  title: {
-    fontSize: 40,
-    width: "100%",
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-  },
-  point: {
-    fontFamily: "Noteworthy",
-    fontSize: 17,
-  },
-  container: {
-    padding: "5%",
-    width: "100%",
-    height: "100%",
-    fontFamily: "Noteworthy",
-  },
-  heading: {
-    fontFamily: "Noteworthy",
-    paddingBottom: 10,
-    fontSize: 25,
-    fontWeight: "bold",
-  },
-  option: {
-    backgroundColor: "#ffac1c",
-    alignItems: "center",
-    borderRadius: 15,
-    padding: 1,
-    width: "80%",
-    paddingHorizontal: 1,
-    margin: 2,
-  },
-  optiontext: {
-    color: "#ffffff",
-    fontFamily: "Noteworthy",
-    fontSize: 20,
-  },
-  button: {
-    backgroundColor: "#ffac1c",
-    padding: 10,
-    position: "relative",
-    bottom: 0,
-    margin: 40,
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-
-  btn: {
-    padding: 2,
-    position: "relative",
-    bottom: 0,
-    margin: 2,
-    left: 0,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  btnText: {
-    fontFamily: "Noteworthy",
-    fontWeight: "bold",
-    fontSize: 13,
-    color: "red",
-  },
-});
