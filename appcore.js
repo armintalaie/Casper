@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./HomeScreen";
 import Templates from "./templates";
 import Login from "./login";
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {auth} from "./Landing";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 const Tab = createBottomTabNavigator();
@@ -43,7 +45,7 @@ return(
     <Tab.Screen
         name="Dashboard"
         options={{
-          tabBarLabel: "Home",
+         // tabBarLabel: "Home",
           /*tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),*/

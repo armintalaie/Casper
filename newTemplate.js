@@ -6,6 +6,9 @@ import {
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+  Button
 } from "react-native";
 
 import styles from "./style";
@@ -33,7 +36,12 @@ export default function NewTemplate({ navigation,route, updateTemplates, templat
         
       </View>
 
-      <TouchableOpacity
+     
+      <KeyboardAvoidingView
+  behavior={'padding'}
+  style={styles.container}>
+ 
+ <TouchableOpacity
         style={styles.statusBtn}
         onPress={() => {
           add();
@@ -43,6 +51,9 @@ export default function NewTemplate({ navigation,route, updateTemplates, templat
         <Text style={styles.btnText}>{action} Template </Text>
        
       </TouchableOpacity>
+</KeyboardAvoidingView>
+
+
     </SafeAreaView>
   );
 

@@ -32,6 +32,7 @@ GoogleSignin.configure({
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       // Sign-in the user with the credential
        auth().signInWithCredential(googleCredential);
+      
      //  onAuthStateChanged(auth().currentUser)  
     
     
@@ -74,7 +75,12 @@ GoogleSignin.configure({
   
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
+       //unsubscribe on unmount
+      if (user) {
+        navigation.replace("app");
+
+      }
+      return subscriber; //
     }, []);
   
     if (initializing) return null;
@@ -93,6 +99,8 @@ GoogleSignin.configure({
         </TouchableOpacity>
       </SafeAreaView>);
     } 
+
+    
     return (
         <SafeAreaView style={styles.landing}>
            <TouchableOpacity style={styles.statusBtn}

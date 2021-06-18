@@ -17,7 +17,8 @@ export default function AllTemplates({
   let count = 1;
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <Text style={styles.title}>Templates</Text>
+      <ScrollView contentContainerStyle={styles.templateCards}>
         {templates.map((e) => (
           <TemplateCard
             key={count++}

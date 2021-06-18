@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   TouchableOpacity,
+  Linking
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import styles from "./style";
@@ -21,13 +22,9 @@ GoogleSignin.configure({
 export default function Login({ navigation}) {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#ffac1c",
-        },
-        headerTintColor: "white",
-        headerBackTitle: "Back",
-      }}
+    screenOptions={{
+      headerShown: false
+    }}
     >
       <Stack.Screen
         name="Settings"
@@ -78,7 +75,8 @@ function GoogleSignIn({navigation}) {
   }
 
   return (
-    <SafeAreaView style={styles.landing}>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Settings</Text>
       <View style={styles.containerstart}>
       <Text style={styles.heading}>{getUser().displayName}</Text>
       <View
@@ -131,6 +129,8 @@ function GoogleSignIn({navigation}) {
               Donate
           </Text>
         </TouchableOpacity>
+
+       
         </View>
      
 
@@ -172,9 +172,23 @@ function GoogleSignIn({navigation}) {
         </Text>
        
       </TouchableOpacity>
+
+
 </View>
      
+<View style={styles.containerstart}>
 
+<Text style={styles.point}>
+          Want to reach out to developer? Send an email to
+        </Text>
+        <TouchableOpacity onPress={() => Linking.openURL('mailto:doubleespressostudios@gmail.com') }
+      title="Re:Casper Feedback">
+          <Text style={styles.btnTextsm}>
+       doubleespressostudios@gmail.com
+        </Text>
+        </TouchableOpacity>
+        </View>
+     
 
     </SafeAreaView>
   );

@@ -8,7 +8,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import NewStatus from "./newStatus";
 import styles from "./style";
-import {auth, GoogleSignin} from "./Landing";
+import {auth, getUser, GoogleSignin} from "./Landing";
 import * as apiroute from "./apiroute.json"
 const Stack = createStackNavigator();
 
@@ -37,7 +37,9 @@ const HomePage = ({ navigation, templates, route }) => {
       data => {
         setUnread(data.unread);
       }
-    )
+    ).catch(e => {
+      
+    })
  
   }
 
@@ -48,8 +50,10 @@ const HomePage = ({ navigation, templates, route }) => {
       subject: details.subject,
       body: details.body,
     }
+    console.log(vac)
 
-  
+    alert(apiroute.route + '/enableStatus')
+    console.warn(tok)
     fetch(apiroute.route + '/enableStatus', {
       method: 'POST',
       headers: {
@@ -64,14 +68,47 @@ const HomePage = ({ navigation, templates, route }) => {
     })
   }
 
+  async function getStatus() {
+    
+    
+    fetch(apiroute.route + '/getStatus', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/JSON'
+      },
+      body: JSON.stringify({
+         token: tok,
+      })
+    }).catch(e => {
+      alert(apiroute.route + '/getStatus')
+      //console.log(e);
+    })
+    .then(rett => rett.json()).then(data =>
+      {
+        console.log(data)
+        if (data.enableAutoReply == true) {
+          setTitle(data.responseSubject)
+          
+        }
+
+        setStatusIsEnabled(data.enableAutoReply)
+    }
+    )
+  }
+
 
   useEffect(() => {
+   if (tok == undefined || tok == ""){
     GoogleSignin.getTokens().then(res => {
       tok = res
+      console.log(tok)
+      getStatus();
       updateInbox();
-    })
-  
-   
+    })} else {
+      getStatus();
+      updateInbox();
+    }
+
   
   })
  
@@ -95,7 +132,7 @@ const HomePage = ({ navigation, templates, route }) => {
 
   function changeStatus(details) {
     if (statusIsEnabled == true) {
-      updateInbox();
+    //  updateInbox();
     fetch(apiroute.route + '/disableStatus', {
       method: 'POST',
       headers: {
@@ -107,22 +144,34 @@ const HomePage = ({ navigation, templates, route }) => {
     }).catch(e => {
       console.log(e);
     })
+
+
+    } else {
+      if (details != null) {
+        console.log(details.subject)
+        setVacation(details);
+        console.log(details)
+        setTitle(details.subject)
+      
+       }
     }
-    setStatusIsEnabled(!statusIsEnabled);
-    if (details != null) {
-     console.log(details.subject)
-     setVacation(details);
-     setTitle(details.subject);
-    }
+    
+   
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.group}>
-        <Text style={styles.heading}>Inbox Glance</Text>
+      <Text style={styles.title}>Dashboard</Text>
+      <View style={styles.glance}>
+      <View style={styles.containerstart}>
+        <Text style={styles.glpointh}>Inbox Glance</Text>
+        <Text style={styles.glpoint}>Logged into: {getUser().email}</Text>
+        </View>
         <View style={styles.containerstart}>
-        <Text style={styles.point}>Unread Emails: {unread}</Text>
-        <Text style={styles.point}>Emails recieved: {recieved}</Text>
+       
+        <Text style={styles.glpointl}>Unread Emails: {unread}</Text>
+        
+        <Text style={styles.glpointl}>Current Status: {statusIsEnabled? title: "None"}</Text>
         </View>
       </View>
 
@@ -150,24 +199,25 @@ const HomePage = ({ navigation, templates, route }) => {
   );
 };
 
+function hello() {
+
+
+  retur 
+}
+
 export default function HomeScreen({ navigation, templates }) {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#ffac1c",
-        },
-        headerTintColor: "white",
-        headerBackTitle: "Back",
-      }}
+  
     >
       <Stack.Screen
         name="Home"
         component={HomePage}
-        options={{ title: "Dashboard" }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="Status"
+      
         options={{ title: "New Status" }}
       >
 
@@ -181,3 +231,6 @@ export default function HomeScreen({ navigation, templates }) {
   }
 }
 
+
+
+// <Text style={styles.glpoint}>Signed into {getUser().email}</Text>

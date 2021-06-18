@@ -20,13 +20,9 @@ export default function Templates({ navigation, templates, updateTemplates }) {
  
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#ffac1c",
-        },
-        headerTintColor: "white",
-        headerBackTitle: "Back",
-      }}
+    screenOptions={{
+      headerShown: false
+    }}
     >
 
 
