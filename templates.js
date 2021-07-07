@@ -9,7 +9,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 
 
-import styles from "./style";
+import {styles} from "./style";
 
 
 const Stack = createStackNavigator();
@@ -20,23 +20,18 @@ export default function Templates({ navigation, templates, updateTemplates }) {
  
   return (
     <Stack.Navigator
-    screenOptions={{
-      headerShown: false
-    }}
     >
-
-
       <Stack.Screen
-        name="All"
-        options={{ title: "Your Templates" }}
-      >
-        {props => <AllTemplates {...props} templates={templates} updateTemplates={updateTemplates} />}
+        name="Templates"
+        options={{ title: "Your Templates" }, { headerShown: false }}
+        >
+        {props => <AllTemplates {...props} />}
 
       </Stack.Screen>
 
       <Stack.Screen
         name="Newt"
-        options={{ title: "New" }}
+        options={{ title: "New Template" }}
       >
 
 {props => <NewTemplate {...props} templates={templates} updateTemplates={updateTemplates} />}

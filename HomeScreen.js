@@ -4,25 +4,32 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import NewStatus from "./newStatus";
-import styles from "./style";
-import {auth, getUser, GoogleSignin} from "./Landing";
+import {styles} from "./style";
+import { GoogleSignin, tokens} from "./Landing";
 import * as apiroute from "./apiroute.json"
 const Stack = createStackNavigator();
-
-
+import {getUser} from "./Landing";
+import TemplateCard from "./templateCard";
 
 const HomePage = ({ navigation, templates, route }) => {
-  const [unread, setUnread] = useState(20);
-  const [sent, setSent] = useState(5);
-  const [recieved, setrecieved] = useState(10);
+  const [unread, setUnread] = useState(0);
   const [title, setTitle] = useState("");
   const [statusIsEnabled, setStatusIsEnabled] = useState(false);
-  let tok;
 
+  const [timeMessage, setTimeMessage] = useState("Morning")
+  const [username, setUsername] = useState("")
+  const [userEmail, setUserEmail] = useState("")
+  const [responseBody, setResponseBody] = useState("");
+  const [restrictToContacts, setRestrictToContacts]  = useState("");
+  let tok;
   let touch = "";
+  let start = "";
+
+
 
   async function updateInbox() {
     fetch(apiroute.route + '/getInboxStat', {
@@ -32,28 +39,25 @@ const HomePage = ({ navigation, templates, route }) => {
       },
       body: JSON.stringify({
          token: tok,
+  
       })
     }).then(res => res.json()).then(
       data => {
         setUnread(data.unread);
+      console.warn("111");
       }
     ).catch(e => {
-      
     })
  
   }
 
   async function setVacation(details) {
-   // const d =  Date();
     const vac = {
       autoreply: details.autoreply,
       subject: details.subject,
       body: details.body,
+      restrictToContacts: details.contacts
     }
-    console.log(vac)
-
-    alert(apiroute.route + '/enableStatus')
-    console.warn(tok)
     fetch(apiroute.route + '/enableStatus', {
       method: 'POST',
       headers: {
@@ -69,8 +73,6 @@ const HomePage = ({ navigation, templates, route }) => {
   }
 
   async function getStatus() {
-    
-    
     fetch(apiroute.route + '/getStatus', {
       method: 'POST',
       headers: {
@@ -80,55 +82,69 @@ const HomePage = ({ navigation, templates, route }) => {
          token: tok,
       })
     }).catch(e => {
-      alert(apiroute.route + '/getStatus')
-      //console.log(e);
+      console.log(e);
     })
     .then(rett => rett.json()).then(data =>
       {
-        console.log(data)
         if (data.enableAutoReply == true) {
-          setTitle(data.responseSubject)
-          
+          setTitle(data.responseSubject);
+          setRestrictToContacts(data.restrictToContacts == true? "Yes" : "No");
+          setResponseBody(data.responseBodyPlainText);
         }
-
         setStatusIsEnabled(data.enableAutoReply)
     }
     )
   }
 
 
-  useEffect(() => {
-   if (tok == undefined || tok == ""){
-    GoogleSignin.getTokens().then(res => {
-      tok = res
-      console.log(tok)
-      getStatus();
-      updateInbox();
-    })} else {
-      getStatus();
-      updateInbox();
-    }
+  useEffect(() => { 
 
+    tok = tokens;
+    getStatus();
+    updateInbox();
+    setUsername(getUser().displayName)
+    setUserEmail(getUser().email)
+
+  date = new Date();
+  date = date.getHours();
+
+  if (date > 12)
+    if (date < 18)
+      setTimeMessage("Afternoon")
+    else
+    setTimeMessage("Evening")
+})
   
-  })
- 
 
   if (statusIsEnabled) {
     touch = (
       <TouchableOpacity style={styles.disable} onPress={() => changeStatus()}>
-        <Text style={styles.btnText}>Disable Status - {title}</Text>
+        <Text style={styles.btnText}>Disable Status</Text>
       </TouchableOpacity>
     );
+    start = ( <TemplateCard
+  
+      title={title}
+      canBeEdited={false}
+      text={responseBody}
+      select={false}
+    />);
+   
+
+
   } else {
     touch = (
       <TouchableOpacity
         style={styles.statusBtn}
-        onPress={() => navigation.navigate("Status", {changeStatus: changeStatus, templates: templates })}
+        onPress={() => navigation.navigate("Status", {changeStatus: changeStatus })}
       >
         <Text style={styles.btnText}>New Status</Text>
       </TouchableOpacity>
+
     );
+    start = (<Text> </Text>);
   }
+
 
   function changeStatus(details) {
     if (statusIsEnabled == true) {
@@ -141,96 +157,74 @@ const HomePage = ({ navigation, templates, route }) => {
       body: JSON.stringify({
          token: tok,
       })
+    }).then(res => {
+      getStatus();
     }).catch(e => {
       console.log(e);
+      alert("fail")
     })
-
-
     } else {
       if (details != null) {
-        console.log(details.subject)
         setVacation(details);
-        console.log(details)
-        setTitle(details.subject)
-      
+        setTitle(details.subject);
        }
     }
-    
-   
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
+      <Text style={styles.greeting}>Good {timeMessage}, {username}</Text>
+      <View style={{width: "100%", justifyContent:"center", alignItems:"center"}}>
+      <Text style={styles.glancetitle}>Your inbox at a glance</Text>
       <View style={styles.glance}>
-      <View style={styles.containerstart}>
-        <Text style={styles.glpointh}>Inbox Glance</Text>
-        <Text style={styles.glpoint}>Logged into: {getUser().email}</Text>
-        </View>
+      
         <View style={styles.containerstart}>
-       
-        <Text style={styles.glpointl}>Unread Emails: {unread}</Text>
+        <View
+  style={{
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    paddingTop: 0,
+    marginBottom: 15,
+  }}>
+     <Text style={styles.glpointh}>{userEmail}</Text>
+     </View>
+        <Text style={styles.glpointl}>
+          <Text style={styles.orangeBold}>{unread}</Text> unread emails</Text>
+        <Text style={styles.glpointl}>Vacation status is  
+        <Text style={styles.orangeBold}> {statusIsEnabled? "active": "inactive"}</Text>
+        </Text>
         
-        <Text style={styles.glpointl}>Current Status: {statusIsEnabled? title: "None"}</Text>
         </View>
       </View>
-
-      <View style={styles.containerstart}>
-      <View style={styles.group}>
-        <Text style={styles.heading}>Quick Set</Text>
-        <Text style={styles.point}>Don't want to be notified?</Text>
-       
-        <TouchableOpacity style={styles.button}
-          onPress={() => setVacation({subject: "hello", body: "ddd", autoreply: true})}>
-          <Text style={styles.btnText}>Do not Disturb</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.point}>No Notification with an auto-reply</Text>
-        <TouchableOpacity style={styles.button}
-         onPress={() => setVacation({subject: "hello", body: "ddd", autoreply: true})}>
-          <Text style={styles.btnText}>Auto reply</Text>
-        </TouchableOpacity>
-      </View>
-      </View>
+     
+{start}
+</View>
       {touch}
     </SafeAreaView>
   );
 };
 
-function hello() {
 
-
-  retur 
-}
 
 export default function HomeScreen({ navigation, templates }) {
   return (
-    <Stack.Navigator
-  
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="Home"
+
         component={HomePage}
-        options={{ headerShown: false }}
-      />
+        options={{ headerShown: false }}/>
       <Stack.Screen
         name="Status"
-      
-        options={{ title: "New Status" }}
-      >
-
-      {props => <NewStatus {...props} templates={templates}  />}
+        options={{ title: "New Status" }}>
+      {props => <NewStatus {...props} />}
         </Stack.Screen>
     </Stack.Navigator>
   );
 
-  function onPress() {
-    alert("You tapped the button!");
-  }
+ 
 }
 
-
-
-// <Text style={styles.glpoint}>Signed into {getUser().email}</Text>

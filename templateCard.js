@@ -6,29 +6,37 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import styles from "./style";
-
+import {styles} from "./style";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeTemplates } from "./templateHandler";
 export default function TemplateCard({
   navigation,
   title,
   text,
   templates,
-  updateTemplate,
   select,
   canBeEdited
 
 }) {
+  async function storeData(value) {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('templates', jsonValue)
+    } catch (e) {
+      // saving error
+    }
+  }
 
-  
   const editable = canBeEdited != undefined? canBeEdited: true;
   const selecteds = select != undefined? select: false;
 
   function handleDel() {
+
     const newTemplates = [];
     templates.forEach((element) => {
       if (element.title != title) newTemplates.push(element);
     });
-    updateTemplate(newTemplates)
+    storeTemplates(newTemplates)
   }
   editbar = (<View></View>);
 
@@ -38,11 +46,9 @@ export default function TemplateCard({
       <TouchableOpacity style={styles.btnsm}>
       <Text style={styles.edittext}
       onPress={() => {
-        handleDel();
         navigation.navigate("Newt", { text: text, title: title, templates: templates })
     }}> Edit 
     </Text>
-
     </TouchableOpacity>
 
     <TouchableOpacity
@@ -68,7 +74,4 @@ export default function TemplateCard({
     </View>
   );
 
-  function onPress() {
-    alert("You tapped the button!");
-  }
 }

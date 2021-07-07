@@ -14,8 +14,6 @@ export default function App() {
 
   const [signedin, setSignedin] = useState(false);
 
-
-
   function updatedSingedUser(status) {
     setSignedin(status);
     
@@ -23,7 +21,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={auth().currentUser? "app":"landing"}
+      <Stack.Navigator initialRouteName={"landing"}
        screenOptions={{
         headerShown: false
       }}>

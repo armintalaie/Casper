@@ -5,7 +5,7 @@ import {
   Linking
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import styles from "./style";
+import {styles} from "./style";
 import { View, Text, Alert } from 'react-native';
 import {auth} from "./Landing";//'@react-native-firebase/auth';
 import {getUser} from "./Landing";
@@ -74,6 +74,40 @@ function GoogleSignIn({navigation}) {
     </SafeAreaView>);
   }
 
+  donation = (
+  <TouchableOpacity style={styles.statusBtn}
+    onPress={() => {
+     title = "Thank You " + getUser().displayName
+     Alert.alert(
+       title,
+
+       "your donation helps us bring better features to Casper faster",
+       [
+         {
+           text: "Not now",
+           onPress: () => {console.log("Ask me later pressed")}
+         },
+         {
+           text: "$5",
+           onPress: () => {}
+         },
+         {
+           text: "$10",
+           onPress: () => {console.log("Ask me later pressed")}
+         },
+         {
+           text: "$15",
+           onPress: () => {console.log("Ask me later pressed")}
+         }
+         
+       ]
+     );
+    }}>
+     <Text style={styles.btnText}>
+         Donate
+     </Text>
+   </TouchableOpacity>);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Settings</Text>
@@ -96,50 +130,11 @@ function GoogleSignIn({navigation}) {
           Thank you for supporting Casper!
 
         </Text>
-
-        <TouchableOpacity style={styles.statusBtn}
-         onPress={() => {
-          title = "Thank You " + getUser().displayName
-          Alert.alert(
-            title,
-
-            "your donation helps us bring better features to Casper faster",
-            [
-              {
-                text: "Not now",
-                onPress: () => {console.log("Ask me later pressed")}
-              },
-              {
-                text: "$5",
-                onPress: () => {}
-              },
-              {
-                text: "$10",
-                onPress: () => {console.log("Ask me later pressed")}
-              },
-              {
-                text: "$15",
-                onPress: () => {console.log("Ask me later pressed")}
-              }
-              
-            ]
-          );
-         }}>
-          <Text style={styles.btnText}>
-              Donate
-          </Text>
-        </TouchableOpacity>
-
-       
         </View>
      
 
  <View style={styles.containerstart}>
-        <Text style={styles.point}>
-          After Signing out, if you have any active statuses, they will be removed and Casper will have no more access. You can always log back.
-        </Text>
 
-      
       <TouchableOpacity style={styles.button}
       onPress={() => {
 
@@ -172,14 +167,17 @@ function GoogleSignIn({navigation}) {
         </Text>
        
       </TouchableOpacity>
+      <Text style={styles.pointxsm}>
+          Signing out does not affect your current inbox status
+        </Text>
 
 
 </View>
      
 <View style={styles.containerstart}>
 
-<Text style={styles.point}>
-          Want to reach out to developer? Send an email to
+<Text style={styles.pointxsm}>
+          Want to reach out? Send an email to
         </Text>
         <TouchableOpacity onPress={() => Linking.openURL('mailto:doubleespressostudios@gmail.com') }
       title="Re:Casper Feedback">
@@ -197,58 +195,3 @@ function GoogleSignIn({navigation}) {
  
 }
 
-
- /*
-  function Settings() {
-
-    const [data, setData] = React.useState("a");
-    return (
-
-     
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity
-          style={styles.statusBtn}
-          onPress={() => {
-            fetch("http://localhost:3001/api/armin@ubc.ca")
-            .then((res) => res.json())
-            .then((data) => setData(data.message));
-          }}
-        >
-          <Text style={styles.btnText}>Login With Gmail {data} </Text>
-        </TouchableOpacity>
-
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-
-
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <GoogleSigninButton
-                style={{width: 192, height: 48}}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Dark}
-                onPress={this._signIn}
-              />
-            </View>
-            <View style={styles.buttonContainer}>
-              {!loggedIn && <Text>You are currently logged out</Text>}
-              {loggedIn && (
-                <Button
-                  onPress={this.signOut}
-                  title="LogOut"
-                  color="red"></Button>
-              )}
-            </View>
-          </View>
-        </ScrollView>
-
-    
-      </SafeAreaView>
-    );
-
-    function onPress() {
-      alert("You tapped the button!");
-    }
-  }
-*/

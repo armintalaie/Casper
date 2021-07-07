@@ -72,35 +72,37 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
     },
     disable: {
-        width: "90%",
+        width: 400,
+        maxWidth: "85%",
         left: 0,
-        borderRadius: 20,
+        borderRadius: 25,
         alignItems: "center",
         marginTop: 30,
-        backgroundColor: "red",
+        backgroundColor: "#7a7672",
         padding: 17,
         marginBottom: 10,
-        shadowColor: "#cccbca",
-
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 9,
+            height: 5,
         },
-        shadowOpacity: 0.38,
-        shadowRadius: 11.95,
+        shadowOpacity: 0.20,
+        shadowRadius: 9.27,
 
-        elevation: 28,
+        elevation: 15,
 
     },
     glance: {
         flexDirection: "column",
         alignItems: "center",
         borderRadius: 20,
-        backgroundColor: "#ff964f",
+        borderColor: "#7a7672",
+        borderWidth: 2,
+        backgroundColor: "#7a7672",
         paddingTop: 20,
         paddingBottom: 20,
-        paddingHorizontal: 4,
-        width: "90%",
+        paddingHorizontal: 3,
+        width: "95%",
         textAlign: "center",
         shadowColor: "#adaaa6",
         shadowOffset: {
@@ -109,10 +111,10 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.95,
         shadowRadius: 3.84,
-        height: 250,
         justifyContent: "space-between",
-        maxHeight: "40%",
         elevation: 20,
+        margin: 5,
+
     },
     group: {
         flexDirection: "column",
@@ -148,7 +150,8 @@ const styles = StyleSheet.create({
         fontWeight: "300",
         paddingBottom: 25,
         marginBottom: 15,
-        color: "#ffffff"
+        color: "#ffffff",
+
     },
     glpointl: {
         fontFamily: font,
@@ -158,17 +161,23 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         fontWeight: "500",
         marginTop: 2,
-        color: "#ffffff"
+        color: "#ffffff",
+
     },
     glpointh: {
         fontFamily: font,
+        fontSize: 20,
+        fontStyle: "italic",
+        color: "#ffffff",
 
-        fontSize: 27,
-        fontWeight: "bold",
-        color: "#ffffff"
+    },
+    fullWidth: {
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
     },
     container: {
-        padding: "5%",
+        padding: 20,
         width: "100%",
         height: "100%",
         flexDirection: "column",
@@ -177,7 +186,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff"
     },
     containerstart: {
-
         padding: "5%",
         width: "100%",
         paddingTop: 1,
@@ -185,25 +193,42 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
     },
+    pointBig: {
+        fontSize: 20,
+        fontStyle: "italic",
+    },
+
+    scrollContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        maxHeight: 300,
+    },
+
+    scrollContainerDashboard: {
+        alignItems: "center",
+        justifyContent: "center",
+        maxHeight: 150,
+    },
+
     statusBtn: {
-        width: "90%",
+        width: 400,
+        maxWidth: "85%",
         left: 0,
-        borderRadius: 20,
+        borderRadius: 25,
         alignItems: "center",
         marginTop: 30,
         backgroundColor: TEST,
         padding: 17,
         marginBottom: 10,
-        shadowColor: "#cccbca",
-
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 9,
+            height: 5,
         },
-        shadowOpacity: 0.38,
-        shadowRadius: 11.95,
+        shadowOpacity: 0.20,
+        shadowRadius: 9.27,
 
-        elevation: 28,
+        elevation: 15,
     },
 
     heading: {
@@ -235,7 +260,7 @@ const styles = StyleSheet.create({
         margin: 5,
         width: 250,
         left: 0,
-        borderRadius: 15,
+        borderRadius: 20,
         alignItems: "center",
         shadowColor: "#bdbab7",
 
@@ -251,7 +276,7 @@ const styles = StyleSheet.create({
     btnText: {
         fontFamily: font,
         fontWeight: "bold",
-        fontSize: 18,
+        fontSize: 20,
 
         color: "#ffffff",
     },
@@ -307,7 +332,7 @@ const styles = StyleSheet.create({
         fontFamily: font,
         fontWeight: "bold",
         fontSize: 13,
-        color: "red",
+        color: TEST,
     },
     pointsm: {
         fontFamily: "System",
@@ -336,16 +361,82 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
 
-    card: {
-        width: "100%",
-
+    pointxsm: {
+        fontFamily: font,
+        fontSize: 13,
+        fontStyle: "italic"
     },
+
     templateCards: {
         width: "100%",
         alignItems: "flex-start",
+    },
+    normalDot: {
+
+
+        height: 8,
+        width: 8,
+        borderRadius: 4,
+        backgroundColor: "silver",
+        marginHorizontal: 4
+    },
+    indicatorContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    greeting: {
+        fontStyle: 'italic',
+        fontWeight: '400',
+        fontSize: 28,
+        paddingBottom: 10,
+    },
+    glancetitle: {
+
+        fontWeight: '400',
+        fontSize: 23,
+        paddingBottom: 10,
+        textAlign: "left",
+
+    },
+
+    activeTemplate: {
+        position: "absolute",
+        backgroundColor: TEST,
+        width: 350,
+        borderRadius: 15,
+        padding: 30,
+        paddingHorizontal: 8,
+        paddingTop: 10,
+        margin: 5,
+        marginBottom: 5,
+        maxWidth: "95%",
+        flexDirection: "column",
+        shadowColor: "#adaaa6",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.95,
+        shadowRadius: 3.84,
+        elevation: 5,
+        top: 170,
+
+    },
+
+    overlay: {
+        width: "100%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 150,
+    },
+    orangeBold: {
+        fontWeight: "bold",
+        color: TEST,
+        fontSize: 22,
     }
 
 });
 
 
-export default styles;
+export { styles, TEST };

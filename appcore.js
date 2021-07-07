@@ -6,21 +6,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./HomeScreen";
 import Templates from "./templates";
 import Login from "./login";
-import AsyncStorage from '@react-native-community/async-storage';
-
-import {auth} from "./Landing";
-import { MaterialCommunityIcons } from "react-native-vector-icons";
+import { TEST } from "./style";
 const Tab = createBottomTabNavigator();
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+savedTemplates = [];
 
 
 export default function Appcore({navigation, route}) {
-    try{
-     
-     
-    }catch(e) {
-      console.log(e)
-    }
-    let signedin = true;
     const [templatese, setTemplates] = useState([
       {
         title: "Vacation",
@@ -39,30 +31,34 @@ export default function Appcore({navigation, route}) {
       setTemplates(updated);
     };
 
+    // stickee-text
 
 return(
-    <Tab.Navigator>
+    <Tab.Navigator
+    tabBarOptions={{
+      activeTintColor: TEST,
+    }}>
     <Tab.Screen
+    
         name="Dashboard"
         options={{
-         // tabBarLabel: "Home",
-          /*tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),*/
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color, size }) => (
+             <Icon name="email"  color={color} size={size} style={{ textAlign: 'center' }}> </Icon>
+          ),
         }}
         children={() => <HomeScreen templates={templatese} />}
+
+        
       />
     <Tab.Screen
         name="Templates"
         options={{
           tabBarLabel: "Templates",
-         /* tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="bookmark"
-              color={color}
-              size={size}
-            />
-          ),*/
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="bookmark-multiple" color={color} size={size} style={{ textAlign: 'center' }}> </Icon>
+            
+         ),
         }}
         children={() => (
           <Templates
@@ -77,11 +73,11 @@ return(
         children={() => <Login navigation={navigation} />}
         options={{
           tabBarLabel: "Settings",
-         /* tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cog" color={color} size={size} />
-          ),*/
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="dots-horizontal" color={color} size={size} style={{ textAlign: 'center' }}> </Icon>
+         ),
+         
         }}
       />
     </Tab.Navigator>);
 }
-
