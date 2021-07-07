@@ -1,20 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
   SafeAreaView,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 
-import styles from "./style";
+import {styles} from "./style";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NewTemplate({ navigation,route, updateTemplates, templates }) {
+
+export default function NewTemplate({ navigation,route}) {
   const [body, updateText] = React.useState(route.params.text == undefined? "Reply body...": route.params.text);
   const [titleL, updateTitle] = React.useState(route.params.title == undefined? "Reply title...": route.params.title);
 
   const action = route.params.title == undefined? "Create": "Update";
+  const prevTitle = route.params.title;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.templateItem}>
@@ -33,29 +37,45 @@ export default function NewTemplate({ navigation,route, updateTemplates, templat
         
       </View>
 
-      <TouchableOpacity
+     
+      <KeyboardAvoidingView
+      behavior={'padding'}
+      style={styles.container}>
+ 
+          <TouchableOpacity
         style={styles.statusBtn}
         onPress={() => {
           add();
-          navigation.navigate("All");
+          navigation.navigate("Templates");
         }}
       >
         <Text style={styles.btnText}>{action} Template </Text>
        
       </TouchableOpacity>
+</KeyboardAvoidingView>
+
+
     </SafeAreaView>
   );
 
-  function onPress() {
-    alert("You tapped the button!");
-  }
-
   function add() {
     const newTemplates = [];
-    templates.forEach((element) => {
-      if (element.title != titleL) newTemplates.push(element);
+    route.params.templates.forEach((element) => {
+      if (element.title != prevTitle) newTemplates.push(element);
     });
+  
     newTemplates.push({title: titleL, body: body})
-    updateTemplates(newTemplates)
+
+    storeData(newTemplates)
+    
+  }
+
+  async function storeData(value) {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('templates', jsonValue)
+    } catch (e) {
+      // saving error
+    }
   }
 }

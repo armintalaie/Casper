@@ -43,6 +43,22 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = casperApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86035CA7A565EF3BDB74CB4A /* Pods-casperApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-casperApp.release.xcconfig"; path = "Target Support Files/Pods-casperApp/Pods-casperApp.release.xcconfig"; sourceTree = "<group>"; };
 		A946CA5726686BF7005B529E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A94972EB2690145200C52191 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		A94972EC2690145200C52191 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		A94972ED2690145200C52191 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		A94972EE2690145200C52191 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		A94972EF2690145200C52191 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		A94972F02690145200C52191 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		A94972F12690145200C52191 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		A94972F22690145200C52191 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		A94972F32690145200C52191 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		A94972F42690145200C52191 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		A94972F52690145200C52191 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		A94972F62690145200C52191 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		A94972F72690145200C52191 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		A94972F82690145300C52191 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		A94972F92690145300C52191 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		A94972FA2690145300C52191 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
 		CAAC5741718A74E17B505F75 /* Pods-casperApp-casperAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-casperApp-casperAppTests.debug.xcconfig"; path = "Target Support Files/Pods-casperApp-casperAppTests/Pods-casperApp-casperAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E1F4A7E4627C4B9E31F39BBC /* Pods-casperApp-casperAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-casperApp-casperAppTests.release.xcconfig"; path = "Target Support Files/Pods-casperApp-casperAppTests/Pods-casperApp-casperAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -130,6 +146,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A94972EA269013A400C52191 /* fonts */,
 				13B07FAE1A68108700A75B9A /* casperApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* casperAppTests */,
@@ -149,6 +166,29 @@
 				00E356EE1AD99517003FC87E /* casperAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A94972EA269013A400C52191 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A94972F02690145200C52191 /* AntDesign.ttf */,
+				A94972EE2690145200C52191 /* Entypo.ttf */,
+				A94972F22690145200C52191 /* EvilIcons.ttf */,
+				A94972F12690145200C52191 /* Feather.ttf */,
+				A94972F72690145200C52191 /* FontAwesome.ttf */,
+				A94972EB2690145200C52191 /* FontAwesome5_Brands.ttf */,
+				A94972F32690145200C52191 /* FontAwesome5_Regular.ttf */,
+				A94972EF2690145200C52191 /* FontAwesome5_Solid.ttf */,
+				A94972F82690145300C52191 /* Fontisto.ttf */,
+				A94972FA2690145300C52191 /* Foundation.ttf */,
+				A94972EC2690145200C52191 /* Ionicons.ttf */,
+				A94972F52690145200C52191 /* MaterialCommunityIcons.ttf */,
+				A94972F62690145200C52191 /* MaterialIcons.ttf */,
+				A94972F42690145200C52191 /* Octicons.ttf */,
+				A94972F92690145300C52191 /* SimpleLineIcons.ttf */,
+				A94972ED2690145200C52191 /* Zocial.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -502,6 +542,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HHU2Z5WF2A;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = casperApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -528,6 +569,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HHU2Z5WF2A;
 				INFOPLIST_FILE = casperApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
