@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   TouchableOpacity,
-  Linking
+  Linking,
+  ScrollView
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {styles} from "./style";
@@ -11,13 +12,11 @@ import {auth} from "./Landing";//'@react-native-firebase/auth';
 import {getUser} from "./Landing";
 import * as credentials from './credentials.json';
 const Stack = createStackNavigator();
-
 import { GoogleSignin, GoogleSigninButton} from '@react-native-google-signin/google-signin';
 GoogleSignin.configure({
   webClientId: credentials.webClientId,
   scopes : credentials.scopes
 });
-
 
 export default function Login({ navigation}) {
   return (
@@ -111,25 +110,37 @@ function GoogleSignIn({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Settings</Text>
-      <View style={styles.containerstart}>
-      <Text style={styles.heading}>{getUser().displayName}</Text>
-      <View
-  style={{
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    marginLeft: 5,
-    marginRight: 5
-  }}>
-     <Text style={styles.point}>{getUser().email}</Text>
-     </View>
-      </View>
+    
 
       <View style={styles.containerstart}>
 
-        <Text style={styles.point}>
-          Thank you for supporting Casper!
+        <Text style={styles.dntext}>
+          Thank you for using Casper. If you've enjoyed using Casper, please take a moment to check out these
+          resources we're passionate about. Support can come through various ways; education, advcoacy, and donation. Thanks!
 
         </Text>
+
+        <ScrollView  style={{width: "100%"}} contentContainerStyle={{alignItems:"center", width: "100%"}}>
+
+<TouchableOpacity style={styles.linkDonation}
+ onPress={() => Linking.openURL('https://www.blacklivesmatter.ca')}>
+        <Text  style={styles.linkTextsm}>Black Lives Matter </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.linkDonation}
+ onPress={() => Linking.openURL('https://reconciliationcanada.ca')}>
+        <Text  style={styles.linkTextsm}>Reconciliation Canada </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.linkDonation}
+ onPress={() => Linking.openURL('https://www.unicef.org/supply/covax-ensuring-global-equitable-access-covid-19-vaccines')}>
+        <Text  style={styles.linkTextsm}> Unicef Covax </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.linkDonation}
+ onPress={() => Linking.openURL('https://impact.site/')}>
+        <Text  style={styles.linkTextsm}> Impact </Text>
+        </TouchableOpacity>
+     
+        </ScrollView>
         </View>
      
 
