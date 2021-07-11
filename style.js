@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     glance: {
         flexDirection: "column",
         alignItems: "center",
-        borderRadius: 20,
+        borderRadius: 10,
         borderColor: "#7a7672",
         borderWidth: 2,
         backgroundColor: "#7a7672",
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
     },
     btnTextsm: {
         fontFamily: font,
-        fontWeight: "bold",
+        fontWeight: "300",
         fontSize: 13,
         color: TEST,
     },
@@ -364,7 +364,9 @@ const styles = StyleSheet.create({
     pointxsm: {
         fontFamily: font,
         fontSize: 13,
-        fontStyle: "italic"
+        fontStyle: "italic",
+        fontWeight: "300",
+        color: "#7a7672",
     },
 
     templateCards: {
@@ -434,6 +436,68 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: TEST,
         fontSize: 22,
+    },
+
+    homeTemplate: {
+        flexDirection: "column",
+        borderRadius: 15,
+        borderColor: TEST,
+        borderWidth: 1.5,
+        backgroundColor: '#ffffff',
+        padding: 30,
+        paddingHorizontal: 15,
+        paddingTop: 15,
+        margin: 1,
+        width: 360,
+        maxWidth: "90%",
+        shadowColor: "#adaaa6",
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.45,
+        shadowRadius: 4.84,
+        elevation: 5,
+
+    },
+
+    homeText: {
+        paddingVertical: 10,
+    },
+
+    linkDonation: {
+        color: TEST,
+        alignItems: "center",
+        padding: 10,
+        paddingVertical: 12,
+        borderColor: "#7a7672",
+        backgroundColor: "#ffffff",
+        borderWidth: 1,
+        margin: 3,
+        borderRadius: 15,
+        maxWidth: 300,
+        width: "100%",
+        shadowColor: "#adaaa6",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    linkTextsm: {
+        fontFamily: font,
+        fontWeight: "bold",
+        fontSize: 18,
+        color: "#7a7672",
+    },
+    dntext: {
+        fontFamily: font,
+        fontWeight: "600",
+        fontSize: 15,
+        color: "#7a7672",
+        paddingBottom: 20
     }
 
 });

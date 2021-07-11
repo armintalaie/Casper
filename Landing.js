@@ -29,22 +29,17 @@ let tokens = "";
     const { idToken } = await GoogleSignin.signIn();
 
       // Create a Google credential with the token
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      // Sign-in the user with the credential
-       auth().signInWithCredential(googleCredential).then(res => {
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    // Sign-in the user with the credential
+      auth().signInWithCredential(googleCredential).then(res => {
 
-        GoogleSignin.getTokens().then(result => {
-               tokens = result
-        
-               onAuthStateChanged(auth().currentUser)  
-
-      navigation.replace("app");
-            })
-      
-       });
-      
-   
-   
+      GoogleSignin.getTokens().then(result => {
+              tokens = result
+              onAuthStateChanged(auth().currentUser)  
+              navigation.replace("app");
+          })
+    
+      });
     
       } catch(e) {
           Alert.alert(
@@ -59,8 +54,6 @@ let tokens = "";
           );
       }
     }
-  
-   
     // Handle user state changes
     function onAuthStateChanged(user) {
       setUser(user);
@@ -70,12 +63,14 @@ let tokens = "";
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
        //unsubscribe on unmount
-      if (user) {
-        navigation.replace("app");
-       
-      } else {
+      if (user)
+      {
+          GoogleSignin.getTokens().then(res => {
+            tokens = res;
+            navigation.replace("app");
+          })
+      
       }
-     
       return subscriber; //
     }, []);
   
@@ -95,25 +90,11 @@ let tokens = "";
             </Text>
         </TouchableOpacity>
       </SafeAreaView>);
-
-
 }
-
 
 export {auth, GoogleSignin, tokens};
 
 export function getUser() {
-  
  // console.log(auth().currentUser)
   return auth().currentUser;
-
 }
-
-export function signOutUser() {
-
-}
-
-
-
-
-// onPress={navigation.navigate('app')}>

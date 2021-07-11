@@ -7,13 +7,13 @@ import {
   View,
   Animated,
   useWindowDimensions
-
 } from "react-native";
 import TemplateCard from "./templateCard";
 import SwitchSelector from "react-native-switch-selector";
 import {styles} from "./style";
 import { getTemplates } from "./templateHandler";
-
+import * as apiroute from "./apiroute.json"
+import { tokens } from "./Landing";
 
 export default function NewStatus({ navigation, route }) {
 
@@ -22,10 +22,8 @@ export default function NewStatus({ navigation, route }) {
   const [reply, setreply] = useState(false);
   const [replyToContacts, setreplyToContacts] = useState(false);
   const [alltemp, setAll] = useState([]);
-
   const { width: windowWidth } = useWindowDimensions();
   const [dots, setDots] = useState(new Array(1).fill('https://images.unsplash.com/photo-1556740749-887f6717d7e4'));
-
   const onlyToContacts = [
     { label: "Reply to all", value: "0" },
     { label: "Reply to contacts", value: "1" },
@@ -53,20 +51,40 @@ export default function NewStatus({ navigation, route }) {
     }
   }
 
-
 useEffect(()=> {
   getData()
 }, [])
 
 
+async function setVacation(details) {
+  const vac = {
+    autoreply: details.autoreply,
+    subject: details.subject,
+    body: details.body,
+    restrictToContacts: details.contacts
+  }
+
+  let newStat = await fetch(apiroute.route + '/enableStatus', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/JSON'
+    },
+    body: JSON.stringify({
+       token: tokens,
+       details: vac
+    })})
+    route.params.changeStatus(details)
+    navigation.navigate("Dashboard");
+}
+
   function setNewStatus() {
     details = {subject: selectedTitle, body:selectedBody ,autoreply: Boolean(reply), contacts: Boolean(replyToContacts) }
-    route.params.changeStatus(details);
-    navigation.navigate("Home", {details});
+    setVacation(details);
   }
 
   const scrollX = useRef(new Animated.Value(0)).current;
 
+  let count = 1;
   showcontacts = reply == true? (<SwitchSelector
     style={styles.switch}
     buttonColor="#7a7672"
@@ -111,6 +129,7 @@ useEffect(()=> {
   >
     {alltemp.map((t) => (
       <TouchableOpacity
+      key={count++}
         onPress={() => {setSelect(t.title)
           setBody(t.body)
          
@@ -118,7 +137,7 @@ useEffect(()=> {
         style={{ width: windowWidth, justifyContent: "center", alignItems: "center" }}
       >
         <TemplateCard
-  
+       
           title={t.title}
           canBeEdited={false}
           text={t.body}

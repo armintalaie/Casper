@@ -42,7 +42,7 @@ return(
     
         name="Dashboard"
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Dashboard",
           tabBarIcon: ({ color, size }) => (
              <Icon name="email"  color={color} size={size} style={{ textAlign: 'center' }}> </Icon>
           ),
