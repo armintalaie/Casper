@@ -9,7 +9,11 @@
 >
 > It’s important to be able to easily, _and elegantly_, step away from your inbox when you need to. This is where Casper can help you. By keeping your most-used away messages you can with a few taps, gain a balance over when you want to answer your emails.
 
-![Casper](./casper2.png)
+<p float="center">
+<img src="./casper1.png" alt="CapserIMG" width="400" float="right"/>
+<img src="./casper2.png" alt="CapserIMG" width="400"/>
+</p>
+
 
 #### Creating Casper
 
@@ -24,3 +28,5 @@ To make Casper I,
 - leveraged the **Gmail AP**I to access user’s to set vacation statuses
 - developed a minimalistic application using **React-Native**
 - deployed the backend in **Node.js** onto Firebase’s **cloud functions**
+
+
